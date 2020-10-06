@@ -1,0 +1,40 @@
+<div>
+  <!-- We added a div for id here so that it would work with Cosmos DB, same with the edit area below this unordered list-->
+    <ul class="heroes">
+        <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
+            <button class="delete-button" (click)="deleteHero(hero)">Delete</button>
+            <div class="hero-element">
+                <div class="badge">{{hero.uid}}</div>
+                <div class="name">{{hero.name}}</div>
+                <div class="saying">{{hero.saying}}</div>
+                <div class="id">{{hero.id}}</div>
+            </div>
+        </li>
+    </ul>
+    <div class="editarea">
+        <button (click)="enableAddMode()">Add New Hero</button>
+        <div *ngIf="selectedHero">
+          <div class="editfields">
+            <div>
+              <label>id: </label>
+              <input [(ngModel)]="selectedHero.uid" placeholder="id" *ngIf="addingHero" />
+              <label *ngIf="!addingHero" class="value">{{selectedHero.uid}}</label>
+            </div>
+            <div>
+              <label>name: </label>
+              <input [(ngModel)]="selectedHero.name" placeholder="name" />
+            </div>
+            <div>
+              <label>saying: </label>
+              <input [(ngModel)]="selectedHero.saying" placeholder="saying" />
+            </div>
+            <div>
+              <label>id: </label>
+              <input [(ngModel)]="selectedHero.id" placeholder="id" />
+            </div>
+          </div>
+            <button (click)="cancel()">Cancel</button>
+            <button (click)="save()">Save</button>
+        </div>
+    </div>
+</div>
